@@ -333,6 +333,8 @@ function setupApiKey() {
             currentConditionsEl.textContent = capitalizeFirstLetter(data.weather[0].description);
             temperatureEl.textContent = `${temp}°F`;
             feelsLikeEl.textContent = `${feelsLike}°F`;
+            windSpeedEl.textContent = `${windspeed} mph`;
+            gustSpeedEl.textContent = `${gustspeed} mph`;
             
             if (precipitation) {
                 precipitationEl.textContent = capitalizeFirstLetter(weatherMain);
