@@ -704,7 +704,9 @@
         // Fetch weather data based on user's location
         function fetchWeatherData() {
             showLoading();
-            
+
+            const apiKey = setupApiKey();
+    if (!apiKey) return;
             // Check if geolocation is supported
             if (!navigator.geolocation) {
                 showError("Geolocation is not supported by your browser");
