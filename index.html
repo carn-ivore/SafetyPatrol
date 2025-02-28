@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,41 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>School Weather Decisions</title>
+    <title>Safety Patrol Uniform</title>
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlNhZmV0eSBQYXRyb2wgVW5pZm9ybSIsCiAgInNob3J0X25hbWUiOiAiUGF0cm9sIFVuaWZvcm0iLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL2ZsYXRpY29uLmNvbS9pY29uL3NldmVudHkvbXBpcm96aGVua292YS8xNTUvc2V2ZW50eV9tcGlyb3poZW5rb3ZhX3VtYnJlbGxhLnBuZyIsCiAgICAgICJzaXplcyI6ICIxNDR4MTQ0IiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0sCiAgInN0YXJ0X3VybCI6ICIvaW5kZXguaHRtbCIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZmZmZmZiIsCiAgInRoZW1lX2NvbG9yIjogIiMwMDdhZmYiCn0=">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlNjaG9vbCBXZWF0aGVyIERlY2lzaW9ucyIsCiAgInNob3J0X25hbWUiOiAiU2Nob29sIFdlYXRoZXIiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL2ZsYXRpY29uLmNvbS9pY29uL3NldmVudHkvbXBpcm96aGVua292YS8xNTUvc2V2ZW50eV9tcGlyb3poZW5rb3ZhX3VtYnJlbGxhLnBuZyIsCiAgICAgICJzaXplcyI6ICIxNDR4MTQ0IiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0sCiAgInN0YXJ0X3VybCI6ICIvaW5kZXguaHRtbCIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2VkZWRlZSIsCiAgInRoZW1lX2NvbG9yIjogIiMwMDE0ODkiCn0=">
     <style>
         :root {
-            --white: #fff;
-            --black: #000;
-            --blue: #001489;
-            --paleblue: #7f89c4;
-            --grayblue: #c1c9de;
-            --slider-arrow-hover: #8b94c9;
-            --gray: #939598;
-            --lightgray: #ededee;
-            --roboto: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            
-            /* Status colors */
-            --status-active: #34c759;
-            --status-canceled: #ff3b30;
-            --status-alert: #ff9500;
-        }
+        --white: #fff;
+        --black: #000;
+        --blue: #001489;
+        --paleblue: #7f89c4;
+        --grayblue: #c1c9de;
+        --slider-arrow-hover: #8b94c9;
+        --gray: #939598;
+        --lightgray: #ededee;
+        --roboto: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         
+        /* Keep these colors for status indicators, or replace if desired */
+        --status-active: #34c759;
+        --status-canceled: #ff3b30;
+    }
         body {
             font-family: var(--roboto);
             margin: 0;
             padding: 0;
             background-color: var(--lightgray);
-            color: var(--black);
+            color: var(black);
         }
-        
         .container {
             max-width: 500px;
             margin: 0 auto;
             padding: 20px;
         }
-        
         header {
             background-color: var(--blue);
             color: var(--white);
@@ -48,155 +45,38 @@
             border-radius: 10px 10px 0 0;
             margin-bottom: 20px;
         }
-        
-        .section {
+        .weather-info, .uniform-info {
             background-color: var(--white);
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--grayblue);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin: 0;
-        }
-        
-        .date-indicator {
-            background-color: var(--grayblue);
-            padding: 4px 8px;
-            border-radius: 5px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .weather-info {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .weather-conditions {
+        .uniform-item {
             display: flex;
             align-items: center;
-            font-size: 16px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
-        
-        .weather-details {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-        }
-        
-        .weather-detail {
+        .uniform-item .icon {
+            width: 30px;
+            margin-right: 10px;
             text-align: center;
-            flex: 1;
         }
-        
-        .weather-detail .value {
-            font-size: 20px;
-            font-weight: bold;
-        }
-        
-        .weather-detail.feels-like .value {
-            color: var(--blue);
-            font-size: 24px;
-            position: relative;
-        }
-        
-        .weather-detail.feels-like .value::after {
-            content: "";
-            position: absolute;
-            bottom: -3px;
-            left: 25%;
-            width: 50%;
-            height: 3px;
-            background-color: var(--blue);
-            border-radius: 3px;
-        }
-        
-        .weather-detail .label {
-            font-size: 12px;
-            color: var(--gray);
-        }
-        
-        .weather-detail.feels-like .label {
-            font-weight: 700;
-            color: var(--blue);
-        }
-        
         .status {
             padding: 10px;
             border-radius: 10px;
             text-align: center;
             font-weight: bold;
-            margin: 15px 0;
+            margin-bottom: 20px;
         }
-        
         .status.active {
             background-color: var(--status-active);
             color: var(--white);
         }
-        
         .status.canceled {
             background-color: var(--status-canceled);
-            color: var(--white);
+            color: var(white);
         }
-        
-        .status.alert {
-            background-color: var(--status-alert);
-            color: var(--white);
-        }
-        
-        .uniform-info {
-            background-color: var(--white);
-            border-radius: 10px;
-            margin-top: 15px;
-        }
-        
-        .uniform-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .uniform-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        
-        .uniform-item .icon {
-            width: 30px;
-            margin-right: 10px;
-            text-align: center;
-            font-size: 18px;
-        }
-        
-        .loading {
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .error {
-            background-color: var(--grayblue);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            color: var(--blue);
-        }
-        
         button {
             background-color: var(--blue);
             color: var(--white);
@@ -207,261 +87,93 @@
             font-size: 16px;
             cursor: pointer;
             margin-bottom: 10px;
-            font-family: var(--roboto);
         }
-        
         button.secondary {
             background-color: var(--paleblue);
         }
-        
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+        .error {
+            background-color: var(--grayblue);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: var(--blue);
+        }
+        .weather-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .weather-detail {
+            text-align: center;
+            flex: 1;
+        }
+        .weather-detail .value {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .weather-detail .label {
+            font-size: 12px;
+            color: var(--gray);
+        }
         .last-updated {
             text-align: center;
             font-size: 12px;
             color: var(--gray);
             margin-top: 20px;
         }
-        
-        .toggle-container {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin-bottom: 10px;
-            font-size: 14px;
-            color: var(--gray);
-        }
-        
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 48px;
-            height: 24px;
-            margin-left: 10px;
-        }
-        
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: var(--grayblue);
-            transition: .4s;
-            border-radius: 24px;
-        }
-        
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: var(--white);
-            transition: .4s;
-            border-radius: 50%;
-        }
-        
-        input:checked + .toggle-slider {
-            background-color: var(--blue);
-        }
-        
-        input:checked + .toggle-slider:before {
-            transform: translateX(24px);
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        .tab-container {
-            display: flex;
-            margin-bottom: 20px;
-        }
-        
-        .tab {
-            flex: 1;
-            padding: 12px 5px;
-            text-align: center;
-            background-color: var(--grayblue);
-            color: var(--black);
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s;
-            font-size: 14px;
-        }
-        
-        .tab:first-child {
-            border-radius: 10px 0 0 10px;
-        }
-        
-        .tab:last-child {
-            border-radius: 0 10px 10px 0;
-        }
-        
-        .tab.active {
-            background-color: var(--blue);
-            color: var(--white);
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>School Weather Decisions</h1>
+            <h1>Safety Patrol Uniform</h1>
         </header>
         
         <div id="loading" class="loading">
-            <p>Getting weather data...</p>
+            <p>Getting current weather data...</p>
         </div>
         
         <div id="error" class="error" style="display: none;"></div>
         
         <div id="content" style="display: none;">
-            <div class="tab-container">
-                <div class="tab active" data-tab="all">All Decisions</div>
-                <div class="tab" data-tab="morning">Morning</div>
-                <div class="tab" data-tab="recess">Recess</div>
-                <div class="tab" data-tab="pickup">Pickup</div>
-            </div>
+            <div id="status" class="status"></div>
             
-            <!-- Morning Drop-off Section -->
-            <div class="section" data-section="morning">
-                <div class="section-header">
-                    <h2 class="section-title">Morning Safety Patrol</h2>
-                    <div class="date-indicator" id="morning-date">Today</div>
-                </div>
-                
-                <div id="morning-status" class="status"></div>
-                
-                <div class="weather-info">
-                    <div class="weather-conditions" id="morning-conditions"></div>
-                    <div class="weather-details">
-                        <div class="weather-detail">
-                            <div class="value" id="morning-temperature"></div>
-                            <div class="label">Temperature</div>
-                        </div>
-                        <div class="weather-detail feels-like">
-                            <div class="value" id="morning-feels-like"></div>
-                            <div class="label">Feels Like</div>
-                        </div>
-                        <div class="weather-detail">
-                            <div class="value" id="morning-precipitation"></div>
-                            <div class="label">Precipitation</div>
-                        </div>
+            <div class="weather-info">
+                <h2>Current Weather</h2>
+                <div id="current-conditions"></div>
+                <div class="weather-details">
+                    <div class="weather-detail">
+                        <div class="value" id="temperature"></div>
+                        <div class="label">Temperature</div>
+                    </div>
+                    <div class="weather-detail">
+                        <div class="value" id="feels-like"></div>
+                        <div class="label">Feels Like</div>
+                    </div>
+                    <div class="weather-detail">
+                        <div class="value" id="precipitation"></div>
+                        <div class="label">Precipitation</div>
                     </div>
                 </div>
-                
-                <div class="uniform-info">
-                    <div class="uniform-title">Required Uniform</div>
-                    <div id="morning-uniform-list"></div>
-                </div>
-            </div>
-            
-            <!-- Recess Section -->
-            <div class="section" data-section="recess">
-                <div class="section-header">
-                    <h2 class="section-title">Recess Decision</h2>
-                    <div class="date-indicator" id="recess-date">Today</div>
-                </div>
-                
-                <div id="recess-status" class="status"></div>
-                
-                <div class="weather-info">
-                    <div class="weather-conditions" id="recess-conditions"></div>
-                    <div class="weather-details">
-                        <div class="weather-detail">
-                            <div class="value" id="recess-temperature"></div>
-                            <div class="label">Temperature</div>
-                        </div>
-                        <div class="weather-detail feels-like">
-                            <div class="value" id="recess-feels-like"></div>
-                            <div class="label">Feels Like</div>
-                        </div>
-                        <div class="weather-detail">
-                            <div class="value" id="recess-precipitation"></div>
-                            <div class="label">Precipitation</div>
-                        </div>
+                <div class="weather-details">
+                    <div class="weather-detail">
+                        <div class="value" id="wind-speed"></div>
+                        <div class="label">Wind Speed</div>
+                    </div>
+                    <div class="weather-detail">
+                        <div class="value" id="gust-speed"></div>
+                        <div class="label">Gust Speed</div>
                     </div>
                 </div>
             </div>
             
-            <!-- Afternoon Pickup Section -->
-            <div class="section" data-section="pickup">
-                <div class="section-header">
-                    <h2 class="section-title">Afternoon Pickup</h2>
-                    <div class="date-indicator" id="pickup-date">Today</div>
-                </div>
-                
-                <div class="toggle-container">
-                    <span>Early Release</span>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="early-release-toggle">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-                
-                <!-- Regular Pickup -->
-                <div id="regular-pickup">
-                    <div id="pickup-status" class="status"></div>
-                    
-                    <div class="weather-info">
-                        <div class="weather-conditions" id="pickup-conditions"></div>
-                        <div class="weather-details">
-                            <div class="weather-detail">
-                                <div class="value" id="pickup-temperature"></div>
-                                <div class="label">Temperature</div>
-                            </div>
-                            <div class="weather-detail feels-like">
-                                <div class="value" id="pickup-feels-like"></div>
-                                <div class="label">Feels Like</div>
-                            </div>
-                            <div class="weather-detail">
-                                <div class="value" id="pickup-precipitation"></div>
-                                <div class="label">Precipitation</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="uniform-info">
-                        <div class="uniform-title">Required Uniform</div>
-                        <div id="pickup-uniform-list"></div>
-                    </div>
-                </div>
-                
-                <!-- Early Release Pickup -->
-                <div id="early-pickup" class="hidden">
-                    <div id="early-pickup-status" class="status"></div>
-                    
-                    <div class="weather-info">
-                        <div class="weather-conditions" id="early-pickup-conditions"></div>
-                        <div class="weather-details">
-                            <div class="weather-detail">
-                                <div class="value" id="early-pickup-temperature"></div>
-                                <div class="label">Temperature</div>
-                            </div>
-                            <div class="weather-detail feels-like">
-                                <div class="value" id="early-pickup-feels-like"></div>
-                                <div class="label">Feels Like</div>
-                            </div>
-                            <div class="weather-detail">
-                                <div class="value" id="early-pickup-precipitation"></div>
-                                <div class="label">Precipitation</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="uniform-info">
-                        <div class="uniform-title">Required Uniform</div>
-                        <div id="early-pickup-uniform-list"></div>
-                    </div>
-                </div>
+            <div class="uniform-info">
+                <h2>Required Uniform</h2>
+                <div id="uniform-list"></div>
             </div>
             
             <button id="weatherbug-btn">Open WeatherBug</button>
@@ -474,37 +186,16 @@
     </div>
     
     <script>
-        // Weather API configuration
-        function setupApiKey() {
-    // Check if API key exists in local storage
-    const storedApiKey = localStorage.getItem('weatherApiKey');
-    
-    if (!storedApiKey) {
-        // If no API key found, prompt user to enter it
-        const apiKey = prompt("Please enter your OpenWeatherMap API key (this will be stored only on your device):");
-        
-        if (apiKey) {
-            localStorage.setItem('weatherApiKey', apiKey);
-            return apiKey;
-        } else {
-            showError("API key is required to use this app");
-            return null;
-        }
-    }
-    
-    return storedApiKey;
-}
         
         // Uniform rules based on weather conditions
         const uniformRules = {
             // Base uniform (always required)
             baseUniform: [
-                { name: "Patrol Belt", icon: "🧵" },
-                { name: "Patrol Badge", icon: "🔰" }
+                { name: "Safety Patrol Vest", icon: "🦺" }
             ],
             // Temperature-based rules
             temperature: [
-                { min: -100, max: 32, items: [{ name: "Winter Coat", icon: "🧥" }, { name: "Gloves", icon: "🧤" }, { name: "Hat", icon: "🎩" }] },
+                { min: -100, max: 32, items: [{ name: "Winter Coat", icon: "🧥" }, { name: "Gloves", icon: "🧤" }, { name: "Hat", icon: "🎩" }, { name: "Snow Pants", icon: "🩳" }] },
                 { min: 32, max: 50, items: [{ name: "Jacket", icon: "🧥" }] },
                 { min: 50, max: 65, items: [{ name: "Fleece or Light Jacket", icon: "🧥" }] },
                 { min: 65, max: 100, items: [{ name: "Short Sleeves", icon: "👕" }] }
@@ -512,27 +203,13 @@
             // Precipitation-based rules
             precipitation: [
                 { type: "rain", items: [{ name: "Rain Poncho", icon: "☔" }] },
-                { type: "snow", items: [{ name: "Snow Boots", icon: "👢" }] }
+                { type: "snow", items: [{ name: "Snow Boots", icon: "🥾" }] }
             ],
             // Cancellation rules
             cancellation: [
                 { condition: "feelsLike", operator: "<=", value: 0, message: "Safety Patrol is CANCELED due to extreme cold" },
                 { condition: "weather", includes: "thunderstorm", message: "Safety Patrol is CANCELED due to thunderstorms" },
                 { condition: "weather", includes: "tornado", message: "Safety Patrol is CANCELED due to severe weather alert" }
-            ],
-            // Indoor pickup rules
-            indoorPickup: [
-                { condition: "feelsLike", operator: "<=", value: 0, message: "INDOOR PICKUP today due to extreme cold" },
-                { condition: "weather", includes: "rain", message: "INDOOR PICKUP today due to rain" },
-                { condition: "weather", includes: "thunderstorm", message: "INDOOR PICKUP today due to thunderstorms" }
-            ],
-            // Indoor recess rules
-            indoorRecess: [
-                { condition: "feelsLike", operator: "<=", value: 20, message: "INDOOR RECESS today due to cold" },
-                { condition: "feelsLike", operator: ">=", value: 95, message: "INDOOR RECESS today due to heat" },
-                { condition: "weather", includes: "rain", message: "INDOOR RECESS today due to rain" },
-                { condition: "weather", includes: "snow", message: "INDOOR RECESS today due to snow" },
-                { condition: "weather", includes: "thunderstorm", message: "INDOOR RECESS today due to thunderstorms" }
             ]
         };
 
@@ -540,109 +217,17 @@
         const loadingEl = document.getElementById('loading');
         const errorEl = document.getElementById('error');
         const contentEl = document.getElementById('content');
+        const statusEl = document.getElementById('status');
+        const currentConditionsEl = document.getElementById('current-conditions');
+        const temperatureEl = document.getElementById('temperature');
+        const feelsLikeEl = document.getElementById('feels-like');
+        const precipitationEl = document.getElementById('precipitation');
+        const windSpeedEl = document.getElementById('wind-speed');
+        const gustSpeedEl = document.getElementById('gust-speed');
+        const uniformListEl = document.getElementById('uniform-list');
         const lastUpdatedEl = document.getElementById('last-updated');
         const weatherbugBtn = document.getElementById('weatherbug-btn');
         const refreshBtn = document.getElementById('refresh-btn');
-        const earlyReleaseToggle = document.getElementById('early-release-toggle');
-        const regularPickupEl = document.getElementById('regular-pickup');
-        const earlyPickupEl = document.getElementById('early-pickup');
-        const tabs = document.querySelectorAll('.tab');
-        const sections = document.querySelectorAll('.section');
-
-        // Time and date helpers
-        function getNextSchoolDay(date) {
-            const day = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-            let daysToAdd = 1;
-            
-            if (day === 5) { // Friday
-                daysToAdd = 3; // Skip to Monday
-            } else if (day === 6) { // Saturday
-                daysToAdd = 2; // Skip to Monday
-            }
-            
-            const nextDate = new Date(date);
-            nextDate.setDate(date.getDate() + daysToAdd);
-            return nextDate;
-        }
-        
-        function formatDate(date, type = 'short') {
-            const options = {
-                weekday: 'short',
-                month: 'short',
-                day: 'numeric'
-            };
-            
-            if (type === 'time') {
-                return date.toLocaleString('en-US', {
-                    hour: 'numeric',
-                    minute: '2-digit',
-                    hour12: true
-                });
-            } else if (type === 'full') {
-                return date.toLocaleString('en-US', {
-                    weekday: 'short',
-                    month: 'short',
-                    day: 'numeric',
-                    hour: 'numeric',
-                    minute: '2-digit',
-                    hour12: true
-                });
-            }
-            
-            return date.toLocaleDateString('en-US', options);
-        }
-        
-        function isSchoolDay(date) {
-            const day = date.getDay();
-            return day >= 1 && day <= 5; // Monday to Friday
-        }
-        
-        function isDuringMorningPatrol(date) {
-            if (!isSchoolDay(date)) return false;
-            
-            const hours = date.getHours();
-            const minutes = date.getMinutes();
-            const totalMinutes = hours * 60 + minutes;
-            
-            // 7:30 AM to 8:00 AM in minutes (450 to 480)
-            return totalMinutes >= 450 && totalMinutes < 480;
-        }
-        
-        function isMorningPatrolOver(date) {
-            if (!isSchoolDay(date)) return true;
-            
-            const hours = date.getHours();
-            const minutes = date.getMinutes();
-            const totalMinutes = hours * 60 + minutes;
-            
-            // After 8:00 AM (480 minutes)
-            return totalMinutes >= 480;
-        }
-        
-        function isRecessTime(date) {
-            if (!isSchoolDay(date)) return false;
-            
-            const hours = date.getHours();
-            // Recess is typically between 10 AM and 1 PM
-            return hours >= 10 && hours < 13;
-        }
-        
-        function isEarlyReleaseTime(date) {
-            if (!isSchoolDay(date)) return false;
-            
-            const hours = date.getHours();
-            // Early release between 11 AM and 12:30 PM
-            return hours >= 11 && hours <= 12 && (hours !== 12 || date.getMinutes() <= 30);
-        }
-        
-        function isRegularPickupTime(date) {
-            if (!isSchoolDay(date)) return false;
-            
-            const hours = date.getHours();
-            const minutes = date.getMinutes();
-            // Regular pickup around 2:45 PM (between 2:30 PM and 3:15 PM)
-            return (hours === 14 && minutes >= 30) || (hours === 15 && minutes <= 15);
-        }
 
         // Initialize app
         document.addEventListener('DOMContentLoaded', () => {
@@ -665,48 +250,36 @@
             // Event listeners
             weatherbugBtn.addEventListener('click', openWeatherBug);
             refreshBtn.addEventListener('click', fetchWeatherData);
-            
-            earlyReleaseToggle.addEventListener('change', function() {
-                if (this.checked) {
-                    regularPickupEl.classList.add('hidden');
-                    earlyPickupEl.classList.remove('hidden');
-                } else {
-                    regularPickupEl.classList.remove('hidden');
-                    earlyPickupEl.classList.add('hidden');
-                }
-            });
-            
-            // Tab functionality
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    
-                    const tabType = tab.getAttribute('data-tab');
-                    
-                    if (tabType === 'all') {
-                        sections.forEach(section => {
-                            section.style.display = 'block';
-                        });
-                    } else {
-                        sections.forEach(section => {
-                            if (section.getAttribute('data-section') === tabType) {
-                                section.style.display = 'block';
-                            } else {
-                                section.style.display = 'none';
-                            }
-                        });
-                    }
-                });
-            });
         });
 
+        // Add this function to your web app
+function setupApiKey() {
+    // Check if API key exists in local storage
+    const storedApiKey = localStorage.getItem('weatherApiKey');
+    
+    if (!storedApiKey) {
+        // If no API key found, prompt user to enter it
+        const apiKey = prompt("Please enter your OpenWeatherMap API key (this will be stored only on your device):");
+        
+        if (apiKey) {
+            localStorage.setItem('weatherApiKey', apiKey);
+            return apiKey;
+        } else {
+            showError("API key is required to use this app");
+            return null;
+        }
+    }
+    
+    return storedApiKey;
+}
+        
         // Fetch weather data based on user's location
         function fetchWeatherData() {
             showLoading();
 
             const apiKey = setupApiKey();
     if (!apiKey) return;
+            
             // Check if geolocation is supported
             if (!navigator.geolocation) {
                 showError("Geolocation is not supported by your browser");
@@ -717,57 +290,22 @@
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
                 
-                // Current date for determining which forecasts we need
-                const now = new Date();
+                // Using OpenWeatherMap API (free tier)
+                const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
                 
-                // Determine if we need tomorrow's forecast for morning patrol
-                const needTomorrowMorning = isMorningPatrolOver(now);
-                
-                // Using OpenWeatherMap API for current weather
-                const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
-                
-                // Using OpenWeatherMap API for forecast (for next day morning)
-                const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
-                
-                // First get current weather
-                fetch(currentWeatherUrl)
+                fetch(url)
                     .then(response => {
-                        if (!response.ok) throw new Error("Weather API error");
+                        if (!response.ok) {
+                            throw new Error("Weather API error");
+                        }
                         return response.json();
                     })
-                    .then(currentData => {
-                        // If we need tomorrow's morning forecast
-                        if (needTomorrowMorning) {
-                            // Get forecast data
-                            return fetch(forecastUrl)
-                                .then(response => {
-                                    if (!response.ok) throw new Error("Forecast API error");
-                                    return response.json();
-                                })
-                                .then(forecastData => {
-                                    // Cache both data sets
-                                    const combinedData = {
-                                        current: currentData,
-                                        forecast: forecastData
-                                    };
-                                    
-                                    localStorage.setItem('weatherData', JSON.stringify(combinedData));
-                                    localStorage.setItem('weatherTimestamp', Date.now().toString());
-                                    
-                                    displayWeatherData(combinedData, new Date());
-                                });
-                        } else {
-                            // Only current data needed
-                            const combinedData = {
-                                current: currentData,
-                                forecast: null
-                            };
-                            
-                            localStorage.setItem('weatherData', JSON.stringify(combinedData));
-                            localStorage.setItem('weatherTimestamp', Date.now().toString());
-                            
-                            displayWeatherData(combinedData, new Date());
-                        }
+                    .then(data => {
+                        // Cache the data
+                        localStorage.setItem('weatherData', JSON.stringify(data));
+                        localStorage.setItem('weatherTimestamp', Date.now().toString());
+                        
+                        displayWeatherData(data, new Date());
                     })
                     .catch(error => {
                         showError("Failed to fetch weather data. Please try again later.");
@@ -778,109 +316,133 @@
             });
         }
 
-        // Get next morning's forecast from forecast data
-        function getNextMorningForecast(forecastData) {
-            if (!forecastData || !forecastData.list || forecastData.list.length === 0) {
-                return null;
-            }
-            
-            const now = new Date();
-            const nextSchoolDay = getNextSchoolDay(now);
-            
-            // Set time to 7:45 AM on the next school day
-            nextSchoolDay.setHours(7, 45, 0, 0);
-            const targetTimestamp = nextSchoolDay.getTime() / 1000; // Convert to Unix timestamp
-            
-            // Find the closest forecast to 7:45 AM on the next school day
-            let closestForecast = forecastData.list[0];
-            let smallestDiff = Math.abs(targetTimestamp - closestForecast.dt);
-            
-            for (let i = 1; i < forecastData.list.length; i++) {
-                const forecast = forecastData.list[i];
-                const diff = Math.abs(targetTimestamp - forecast.dt);
-                
-                if (diff < smallestDiff) {
-                    smallestDiff = diff;
-                    closestForecast = forecast;
-                }
-            }
-            
-            return closestForecast;
-        }
-
-        // Display weather data and determine all decisions
+        // Display weather data and determine uniform
         function displayWeatherData(data, timestamp) {
             hideLoading();
             
-            const now = new Date();
-            const currentData = data.current;
+            // Extract relevant weather information
+            const temp = Math.round(data.main.temp);
+            const feelsLike = Math.round(data.main.feels_like);
+            const weatherCondition = data.weather[0].description.toLowerCase();
+            const weatherMain = data.weather[0].main.toLowerCase();
+            const windSpeed = data.wind.speed;
+            const gustSpeed = data.wind.gust;
+            const precipitation = weatherMain.includes("rain") || weatherMain.includes("snow") || 
+                               weatherCondition.includes("rain") || weatherCondition.includes("snow");
             
-            // Extract current weather information
-            const currentTemp = Math.round(currentData.main.temp);
-            const currentFeelsLike = Math.round(currentData.main.feels_like);
-            const currentWeatherCondition = currentData.weather[0].description.toLowerCase();
-            const currentWeatherMain = currentData.weather[0].main.toLowerCase();
-            const currentPrecipitation = currentWeatherMain.includes("rain") || currentWeatherMain.includes("snow");
-
-            // If morning patrol is over, use forecast for next morning
-            let morningForecast = null;
-            if (isMorningPatrolOver(now) && data.forecast) {
-                morningForecast = getNextMorningForecast(data.forecast);
-            }
-
-            // Set weather data for each section
-            setWeatherData("morning", morningForecast || currentData);
-            setWeatherData("recess", currentData);
-            setWeatherData("pickup", currentData);
-
-            // Handle early release toggle
-            if (isEarlyReleaseTime(now)) {
-                earlyReleaseToggle.checked = true;
-                regularPickupEl.classList.add("hidden");
-                earlyPickupEl.classList.remove("hidden");
-                setWeatherData("early-pickup", currentData);
+            // Display weather info
+            currentConditionsEl.textContent = capitalizeFirstLetter(data.weather[0].description);
+            temperatureEl.textContent = `${temp}°F`;
+            feelsLikeEl.textContent = `${feelsLike}°F`;
+            
+            if (precipitation) {
+                precipitationEl.textContent = capitalizeFirstLetter(weatherMain);
             } else {
-                earlyReleaseToggle.checked = false;
-                regularPickupEl.classList.remove("hidden");
-                earlyPickupEl.classList.add("hidden");
+                precipitationEl.textContent = "None";
             }
-
+            
+            // Check for patrol cancellation
+            let isCanceled = false;
+            for (const rule of uniformRules.cancellation) {
+                if (rule.condition === "feelsLike" && rule.operator === "<=" && feelsLike <= rule.value) {
+                    statusEl.textContent = rule.message;
+                    statusEl.className = "status canceled";
+                    isCanceled = true;
+                    break;
+                } else if (rule.condition === "weather" && weatherCondition.includes(rule.includes)) {
+                    statusEl.textContent = rule.message;
+                    statusEl.className = "status canceled";
+                    isCanceled = true;
+                    break;
+                }
+            }
+            
+            // If not canceled, show active status
+            if (!isCanceled) {
+                statusEl.textContent = "Safety Patrol is ACTIVE today";
+                statusEl.className = "status active";
+            }
+            
+            // Determine required uniform
+            let requiredUniform = [...uniformRules.baseUniform];
+            
+            // Add temperature-based items
+            for (const rule of uniformRules.temperature) {
+                if (temp >= rule.min && temp <= rule.max) {
+                    requiredUniform = [...requiredUniform, ...rule.items];
+                    break;
+                }
+            }
+            
+            // Add precipitation-based items
+            if (weatherMain.includes("rain") || weatherCondition.includes("rain")) {
+                const rainItems = uniformRules.precipitation.find(rule => rule.type === "rain").items;
+                requiredUniform = [...requiredUniform, ...rainItems];
+            }
+            
+            if (weatherMain.includes("snow") || weatherCondition.includes("snow")) {
+                const snowItems = uniformRules.precipitation.find(rule => rule.type === "snow").items;
+                requiredUniform = [...requiredUniform, ...snowItems];
+            }
+            
+            // Display uniform list
+            uniformListEl.innerHTML = '';
+            requiredUniform.forEach(item => {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'uniform-item';
+                itemEl.innerHTML = `
+                    <div class="icon">${item.icon}</div>
+                    <div>${item.name}</div>
+                `;
+                uniformListEl.appendChild(itemEl);
+            });
+            
             // Update last updated time
-            lastUpdatedEl.textContent = formatDate(timestamp, 'full');
+            lastUpdatedEl.textContent = formatDate(timestamp);
+            
+            // Show content
+            contentEl.style.display = 'block';
         }
 
-        // Set weather details for a section
-        function setWeatherData(section, weatherData) {
-            if (!weatherData) return;
-
-            document.getElementById(`${section}-temperature`).textContent = `${Math.round(weatherData.main.temp)}°F`;
-            document.getElementById(`${section}-feels-like`).textContent = `${Math.round(weatherData.main.feels_like)}°F`;
-            document.getElementById(`${section}-conditions`).textContent = weatherData.weather[0].description;
-            document.getElementById(`${section}-precipitation`).textContent = weatherData.rain ? `${weatherData.rain["1h"]} mm` : (weatherData.snow ? `${weatherData.snow["1h"]} mm` : "0 mm");
-
-            updateDecision(section, weatherData);
-        }
-
-        // Show loading indicator
+        // Helper functions
         function showLoading() {
-            loadingEl.style.display = "block";
-            contentEl.style.display = "none";
-            errorEl.style.display = "none";
+            loadingEl.style.display = 'block';
+            errorEl.style.display = 'none';
+            contentEl.style.display = 'none';
         }
 
-        // Hide loading indicator
         function hideLoading() {
-            loadingEl.style.display = "none";
-            contentEl.style.display = "block";
-            errorEl.style.display = "none";
+            loadingEl.style.display = 'none';
         }
 
-        // Show error message
         function showError(message) {
             errorEl.textContent = message;
-            errorEl.style.display = "block";
-            loadingEl.style.display = "none";
-            contentEl.style.display = "none";
+            errorEl.style.display = 'block';
+            loadingEl.style.display = 'none';
+        }
+
+        function openWeatherBug() {
+            // Try to open WeatherBug app first
+            window.location.href = 'weatherbug://';
+            
+            // Fallback to WeatherBug website after a short delay
+            setTimeout(() => {
+                window.location.href = 'https://www.weatherbug.com';
+            }, 500);
+        }
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        function formatDate(date) {
+            return date.toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            });
         }
     </script>
 </body>
