@@ -158,6 +158,16 @@
                         <div class="label">Precipitation</div>
                     </div>
                 </div>
+                <div class="weather-details">
+                    <div class="weather-detail">
+                        <div class="value" id="wind-speed"></div>
+                        <div class="label">Wind Speed</div>
+                    </div>
+                    <div class="weather-detail">
+                        <div class="value" id="gust-speed"></div>
+                        <div class="label">Gust Speed</div>
+                    </div>
+                </div>
             </div>
             
             <div class="uniform-info">
@@ -175,8 +185,6 @@
     </div>
     
     <script>
-        // Weather API configuration
-        const API_KEY = "YOUR_API_KEY"; // Replace with your OpenWeatherMap API key
         
         // Uniform rules based on weather conditions
         const uniformRules = {
@@ -213,6 +221,8 @@
         const temperatureEl = document.getElementById('temperature');
         const feelsLikeEl = document.getElementById('feels-like');
         const precipitationEl = document.getElementById('precipitation');
+        const windSpeedEl = document.getElementById('wind-speed');
+        const gustSpeedEl = document.getElementById('gust-speed');
         const uniformListEl = document.getElementById('uniform-list');
         const lastUpdatedEl = document.getElementById('last-updated');
         const weatherbugBtn = document.getElementById('weatherbug-btn');
@@ -314,6 +324,8 @@ function setupApiKey() {
             const feelsLike = Math.round(data.main.feels_like);
             const weatherCondition = data.weather[0].description.toLowerCase();
             const weatherMain = data.weather[0].main.toLowerCase();
+            const windSpeed = data.wind.speed;
+            const gustSpeed = data.wind.gust;
             const precipitation = weatherMain.includes("rain") || weatherMain.includes("snow") || 
                                weatherCondition.includes("rain") || weatherCondition.includes("snow");
             
