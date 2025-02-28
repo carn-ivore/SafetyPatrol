@@ -475,7 +475,25 @@
     
     <script>
         // Weather API configuration
-        const API_KEY = "YOUR_API_KEY"; // Replace with your OpenWeatherMap API key
+        function setupApiKey() {
+    // Check if API key exists in local storage
+    const storedApiKey = localStorage.getItem('weatherApiKey');
+    
+    if (!storedApiKey) {
+        // If no API key found, prompt user to enter it
+        const apiKey = prompt("Please enter your OpenWeatherMap API key (this will be stored only on your device):");
+        
+        if (apiKey) {
+            localStorage.setItem('weatherApiKey', apiKey);
+            return apiKey;
+        } else {
+            showError("API key is required to use this app");
+            return null;
+        }
+    }
+    
+    return storedApiKey;
+}
         
         // Uniform rules based on weather conditions
         const uniformRules = {
@@ -704,10 +722,10 @@
                 const needTomorrowMorning = isMorningPatrolOver(now);
                 
                 // Using OpenWeatherMap API for current weather
-                const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${API_KEY}`;
+                const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
                 
                 // Using OpenWeatherMap API for forecast (for next day morning)
-                const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${API_KEY}`;
+                const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
                 
                 // First get current weather
                 fetch(currentWeatherUrl)
