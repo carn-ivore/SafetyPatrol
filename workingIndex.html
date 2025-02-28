@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -325,8 +324,8 @@ function setupApiKey() {
             const feelsLike = Math.round(data.main.feels_like);
             const weatherCondition = data.weather[0].description.toLowerCase();
             const weatherMain = data.weather[0].main.toLowerCase();
-            const windSpeed = data.wind.speed;
-            const gustSpeed = data.wind.gust;
+            const windSpeed = Math.round(data.wind.speed);
+            const gustSpeed = Math.round(data.wind.gust);
             const precipitation = weatherMain.includes("rain") || weatherMain.includes("snow") || 
                                weatherCondition.includes("rain") || weatherCondition.includes("snow");
             
@@ -334,6 +333,8 @@ function setupApiKey() {
             currentConditionsEl.textContent = capitalizeFirstLetter(data.weather[0].description);
             temperatureEl.textContent = `${temp}°F`;
             feelsLikeEl.textContent = `${feelsLike}°F`;
+            windSpeedEl.textContent = `${windSpeed} mph`;
+            gustSpeedEl.textContent = `${gustSpeed} mph`;
             
             if (precipitation) {
                 precipitationEl.textContent = capitalizeFirstLetter(weatherMain);
