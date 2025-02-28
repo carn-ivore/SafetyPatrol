@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Safety Patrol Uniform</title>
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlNhZmV0eSBQYXRyb2wgVW5pZm9ybSIsCiAgInNob3J0X25hbWUiOiAiUGF0cm9sIFVuaWZvcm0iLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL2ZsYXRpY29uLmNvbS9pY29uL3NldmVudHkvbXBpcm96aGVua292YS8xNTUvc2V2ZW50eV9tcGlyb3poZW5rb3ZhX3VtYnJlbGxhLnBuZyIsCiAgICAgICJzaXplcyI6ICIxNDR4MTQ0IiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0sCiAgInN0YXJ0X3VybCI6ICIvaW5kZXguaHRtbCIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZmZmZmZiIsCiAgInRoZW1lX2NvbG9yIjogIiMwMDdhZmYiCn0=">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f7;
+            color: #333;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #007aff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 20px;
+        }
+        .weather-info {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .uniform-info {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .uniform-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .uniform-item .icon {
+            width: 30px;
+            margin-right: 10px;
+            text-align: center;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .status.active {
+            background-color: #34c759;
+            color: white;
+        }
+        .status.canceled {
+            background-color: #ff3b30;
+            color: white;
+        }
+        button {
+            background-color: #007aff;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        button.secondary {
+            background-color: #5ac8fa;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+        .error {
+            background-color: #ffdddd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: #d8000c;
+        }
+        .weather-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .weather-detail {
+            text-align: center;
+            flex: 1;
+        }
+        .weather-detail .value {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .weather-detail .label {
+            font-size: 12px;
+            color: #666;
+        }
+        .last-updated {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Safety Patrol Uniform</h1>
+        </header>
+        
+        <div id="loading" class="loading">
+            <p>Getting current weather data...</p>
+        </div>
+        
+        <div id="error" class="error" style="display: none;"></div>
+        
+        <div id="content" style="display: none;">
+            <div id="status" class="status"></div>
+            
+            <div class="weather-info">
+                <h2>Current Weather</h2>
+                <div id="current-conditions"></div>
+                <div class="weather-details">
+                    <div class="weather-detail">
+                        <div class="value" id="temperature"></div>
+                        <div class="label">Temperature</div>
+                    </div>
+                    <div class="weather-detail">
+                        <div class="value" id="feels-like"></div>
+                        <div class="label">Feels Like</div>
+                    </div>
+                    <div class="weather-detail">
+                        <div class="value" id="precipitation"></div>
+                        <div class="label">Precipitation</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="uniform-info">
+                <h2>Required Uniform</h2>
+                <div id="uniform-list"></div>
+            </div>
+            
+            <button id="weatherbug-btn">Open WeatherBug</button>
+            <button id="refresh-btn" class="secondary">Refresh Weather Data</button>
+            
+            <div class="last-updated">
+                Last updated: <span id="last-updated"></span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Weather API configuration
+        const API_KEY = "YOUR_API_KEY"; // Replace with your OpenWeatherMap API key
+        
+        // Uniform rules based on weather conditions
+        const uniformRules = {
+            // Base uniform (always required)
+            baseUniform: [
+                { name: "Patrol Belt", icon: "🧵" },
+                { name: "Patrol Badge", icon: "🔰" }
+            ],
+            // Temperature-based rules
+            temperature: [
+                { min: -100, max: 32, items: [{ name: "Winter Coat", icon: "🧥" }, { name: "Gloves", icon: "🧤" }, { name: "Hat", icon: "🎩" }] },
+                { min: 32, max: 50, items: [{ name: "Jacket", icon: "🧥" }] },
+                { min: 50, max: 65, items: [{ name: "Fleece or Light Jacket", icon: "🧥" }] },
+                { min: 65, max: 100, items: [{ name: "Short Sleeves", icon: "👕" }] }
+            ],
+            // Precipitation-based rules
+            precipitation: [
+                { type: "rain", items: [{ name: "Rain Poncho", icon: "☔" }] },
+                { type: "snow", items: [{ name: "Snow Boots", icon: "👢" }] }
+            ],
+            // Cancellation rules
+            cancellation: [
+                { condition: "feelsLike", operator: "<=", value: 0, message: "Safety Patrol is CANCELED due to extreme cold" },
+                { condition: "weather", includes: "thunderstorm", message: "Safety Patrol is CANCELED due to thunderstorms" },
+                { condition: "weather", includes: "tornado", message: "Safety Patrol is CANCELED due to severe weather alert" }
+            ]
+        };
+
+        // DOM elements
+        const loadingEl = document.getElementById('loading');
+        const errorEl = document.getElementById('error');
+        const contentEl = document.getElementById('content');
+        const statusEl = document.getElementById('status');
+        const currentConditionsEl = document.getElementById('current-conditions');
+        const temperatureEl = document.getElementById('temperature');
+        const feelsLikeEl = document.getElementById('feels-like');
+        const precipitationEl = document.getElementById('precipitation');
+        const uniformListEl = document.getElementById('uniform-list');
+        const lastUpdatedEl = document.getElementById('last-updated');
+        const weatherbugBtn = document.getElementById('weatherbug-btn');
+        const refreshBtn = document.getElementById('refresh-btn');
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', () => {
+            // Try to load from cache first
+            const cachedData = localStorage.getItem('weatherData');
+            const cachedTimestamp = localStorage.getItem('weatherTimestamp');
+            
+            if (cachedData && cachedTimestamp) {
+                const cacheAge = Date.now() - parseInt(cachedTimestamp);
+                // Use cache if less than 30 minutes old
+                if (cacheAge < 30 * 60 * 1000) {
+                    displayWeatherData(JSON.parse(cachedData), new Date(parseInt(cachedTimestamp)));
+                } else {
+                    fetchWeatherData();
+                }
+            } else {
+                fetchWeatherData();
+            }
+            
+            // Event listeners
+            weatherbugBtn.addEventListener('click', openWeatherBug);
+            refreshBtn.addEventListener('click', fetchWeatherData);
+        });
+
+        // Fetch weather data based on user's location
+        function fetchWeatherData() {
+            showLoading();
+            
+            // Check if geolocation is supported
+            if (!navigator.geolocation) {
+                showError("Geolocation is not supported by your browser");
+                return;
+            }
+            
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                
+                // Using OpenWeatherMap API (free tier)
+                const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${API_KEY}`;
+                
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Weather API error");
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Cache the data
+                        localStorage.setItem('weatherData', JSON.stringify(data));
+                        localStorage.setItem('weatherTimestamp', Date.now().toString());
+                        
+                        displayWeatherData(data, new Date());
+                    })
+                    .catch(error => {
+                        showError("Failed to fetch weather data. Please try again later.");
+                        console.error(error);
+                    });
+            }, () => {
+                showError("Unable to get your location. Please allow location access.");
+            });
+        }
+
+        // Display weather data and determine uniform
+        function displayWeatherData(data, timestamp) {
+            hideLoading();
+            
+            // Extract relevant weather information
+            const temp = Math.round(data.main.temp);
+            const feelsLike = Math.round(data.main.feels_like);
+            const weatherCondition = data.weather[0].description.toLowerCase();
+            const weatherMain = data.weather[0].main.toLowerCase();
+            const precipitation = weatherMain.includes("rain") || weatherMain.includes("snow") || 
+                               weatherCondition.includes("rain") || weatherCondition.includes("snow");
+            
+            // Display weather info
+            currentConditionsEl.textContent = capitalizeFirstLetter(data.weather[0].description);
+            temperatureEl.textContent = `${temp}°F`;
+            feelsLikeEl.textContent = `${feelsLike}°F`;
+            
+            if (precipitation) {
+                precipitationEl.textContent = capitalizeFirstLetter(weatherMain);
+            } else {
+                precipitationEl.textContent = "None";
+            }
+            
+            // Check for patrol cancellation
+            let isCanceled = false;
+            for (const rule of uniformRules.cancellation) {
+                if (rule.condition === "feelsLike" && rule.operator === "<=" && feelsLike <= rule.value) {
+                    statusEl.textContent = rule.message;
+                    statusEl.className = "status canceled";
+                    isCanceled = true;
+                    break;
+                } else if (rule.condition === "weather" && weatherCondition.includes(rule.includes)) {
+                    statusEl.textContent = rule.message;
+                    statusEl.className = "status canceled";
+                    isCanceled = true;
+                    break;
+                }
+            }
+            
+            // If not canceled, show active status
+            if (!isCanceled) {
+                statusEl.textContent = "Safety Patrol is ACTIVE today";
+                statusEl.className = "status active";
+            }
+            
+            // Determine required uniform
+            let requiredUniform = [...uniformRules.baseUniform];
+            
+            // Add temperature-based items
+            for (const rule of uniformRules.temperature) {
+                if (temp >= rule.min && temp <= rule.max) {
+                    requiredUniform = [...requiredUniform, ...rule.items];
+                    break;
+                }
+            }
+            
+            // Add precipitation-based items
+            if (weatherMain.includes("rain") || weatherCondition.includes("rain")) {
+                const rainItems = uniformRules.precipitation.find(rule => rule.type === "rain").items;
+                requiredUniform = [...requiredUniform, ...rainItems];
+            }
+            
+            if (weatherMain.includes("snow") || weatherCondition.includes("snow")) {
+                const snowItems = uniformRules.precipitation.find(rule => rule.type === "snow").items;
+                requiredUniform = [...requiredUniform, ...snowItems];
+            }
+            
+            // Display uniform list
+            uniformListEl.innerHTML = '';
+            requiredUniform.forEach(item => {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'uniform-item';
+                itemEl.innerHTML = `
+                    <div class="icon">${item.icon}</div>
+                    <div>${item.name}</div>
+                `;
+                uniformListEl.appendChild(itemEl);
+            });
+            
+            // Update last updated time
+            lastUpdatedEl.textContent = formatDate(timestamp);
+            
+            // Show content
+            contentEl.style.display = 'block';
+        }
+
+        // Helper functions
+        function showLoading() {
+            loadingEl.style.display = 'block';
+            errorEl.style.display = 'none';
+            contentEl.style.display = 'none';
+        }
+
+        function hideLoading() {
+            loadingEl.style.display = 'none';
+        }
+
+        function showError(message) {
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+            loadingEl.style.display = 'none';
+        }
+
+        function openWeatherBug() {
+            // Try to open WeatherBug app first
+            window.location.href = 'weatherbug://';
+            
+            // Fallback to WeatherBug website after a short delay
+            setTimeout(() => {
+                window.location.href = 'https://www.weatherbug.com';
+            }, 500);
+        }
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        function formatDate(date) {
+            return date.toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            });
+        }
+    </script>
+</body>
+</html>
