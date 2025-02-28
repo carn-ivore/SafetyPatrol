@@ -74,7 +74,15 @@
         }
         .status.canceled {
             background-color: var(--status-canceled);
-            color: var(white);
+            color: var(--white);
+        }
+        .status.outdoor {
+            background-color: var(--status-active);
+            color: var(--white);
+        }
+        .status.indoor {
+            background-color: var(--status-canceled);
+            color: var(--white);
         }
         button {
             background-color: var(--blue);
@@ -140,6 +148,7 @@
         
         <div id="content" style="display: none;">
             <div id="status" class="status"></div>
+            <div id="recessStatus" class="status"></div>
             
             <div class="weather-info">
                 <h2>Current Weather</h2>
@@ -217,6 +226,7 @@
         const errorEl = document.getElementById('error');
         const contentEl = document.getElementById('content');
         const statusEl = document.getElementById('status');
+        const recessStatusEl = document.getElementById('recessStatus");
         const currentConditionsEl = document.getElementById('current-conditions');
         const temperatureEl = document.getElementById('temperature');
         const feelsLikeEl = document.getElementById('feels-like');
@@ -362,6 +372,28 @@ function setupApiKey() {
             if (!isCanceled) {
                 statusEl.textContent = "Safety Patrol is ACTIVE today";
                 statusEl.className = "status active";
+            }
+
+            // Check for recess status (indoor vs outdoor)
+            let isIndoorRecess = false;
+            
+            // Check if it's raining
+            if (weatherCondition.includes("rain")) {
+                recessStatusEl.textContent = "INDOOR Recess (rain)";
+                recessStatusEl.className = "status indoor";
+                isIndoorRecess = true;
+            }
+            // Check if temperature is too cold
+            else if (feelsLike <= 0) {
+                recessStatusEl.textContent = "INDOOR Recess (too cold)";
+                recessStatusEl.className = "status indoor";
+                isIndoorRecess = true;
+            }
+            
+            // If conditions are good, show outdoor recess status
+            if (!isIndoorRecess) {
+                recessStatusEl.textContent = "OUTDOOR Recess";
+                recessStatusEl.className = "status outdoor";
             }
             
             // Determine required uniform
