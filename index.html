@@ -7,13 +7,29 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Safety Patrol Uniform</title>
     <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlNhZmV0eSBQYXRyb2wgVW5pZm9ybSIsCiAgInNob3J0X25hbWUiOiAiUGF0cm9sIFVuaWZvcm0iLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL2ZsYXRpY29uLmNvbS9pY29uL3NldmVudHkvbXBpcm96aGVua292YS8xNTUvc2V2ZW50eV9tcGlyb3poZW5rb3ZhX3VtYnJlbGxhLnBuZyIsCiAgICAgICJzaXplcyI6ICIxNDR4MTQ0IiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0sCiAgInN0YXJ0X3VybCI6ICIvaW5kZXguaHRtbCIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZmZmZmZiIsCiAgInRoZW1lX2NvbG9yIjogIiMwMDdhZmYiCn0=">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+        --white: #fff;
+        --black: #000;
+        --blue: #001489;
+        --paleblue: #7f89c4;
+        --grayblue: #c1c9de;
+        --slider-arrow-hover: #8b94c9;
+        --gray: #939598;
+        --lightgray: #ededee;
+        --roboto: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        
+        /* Keep these colors for status indicators, or replace if desired */
+        --status-active: #34c759;
+        --status-canceled: #ff3b30;
+    }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: var(--roboto);
             margin: 0;
             padding: 0;
-            background-color: #f5f5f7;
-            color: #333;
+            background-color: var(--lightgray);
+            color: var(black);
         }
         .container {
             max-width: 500px;
@@ -21,22 +37,15 @@
             padding: 20px;
         }
         header {
-            background-color: #007aff;
-            color: white;
+            background-color: var(--blue);
+            color: var(--white);
             padding: 15px;
             text-align: center;
             border-radius: 10px 10px 0 0;
             margin-bottom: 20px;
         }
-        .weather-info {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .uniform-info {
-            background-color: white;
+        .weather-info, .uniform-info {
+            background-color: var(--white);
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
@@ -60,16 +69,16 @@
             margin-bottom: 20px;
         }
         .status.active {
-            background-color: #34c759;
-            color: white;
+            background-color: var(--status-active);
+            color: var(--white);
         }
         .status.canceled {
-            background-color: #ff3b30;
-            color: white;
+            background-color: var(--status-canceled);
+            color: var(white);
         }
         button {
-            background-color: #007aff;
-            color: white;
+            background-color: var(--blue);
+            color: var(--white);
             border: none;
             padding: 15px;
             width: 100%;
@@ -79,18 +88,18 @@
             margin-bottom: 10px;
         }
         button.secondary {
-            background-color: #5ac8fa;
+            background-color: var(--paleblue);
         }
         .loading {
             text-align: center;
             padding: 20px;
         }
         .error {
-            background-color: #ffdddd;
+            background-color: var(--grayblue);
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 20px;
-            color: #d8000c;
+            color: var(--blue);
         }
         .weather-details {
             display: flex;
@@ -107,12 +116,12 @@
         }
         .weather-detail .label {
             font-size: 12px;
-            color: #666;
+            color: var(--gray);
         }
         .last-updated {
             text-align: center;
             font-size: 12px;
-            color: #666;
+            color: var(--gray);
             margin-top: 20px;
         }
     </style>
