@@ -173,12 +173,11 @@
         const uniformRules = {
             // Base uniform (always required)
             baseUniform: [
-                { name: "Patrol Belt", icon: "🧵" },
-                { name: "Patrol Badge", icon: "🔰" }
+                { name: "Safety Patrol Vest", icon: "🦺" }
             ],
             // Temperature-based rules
             temperature: [
-                { min: -100, max: 32, items: [{ name: "Winter Coat", icon: "🧥" }, { name: "Gloves", icon: "🧤" }, { name: "Hat", icon: "🎩" }] },
+                { min: -100, max: 32, items: [{ name: "Winter Coat", icon: "🧥" }, { name: "Gloves", icon: "🧤" }, { name: "Hat", icon: "🎩" }, { name: "Snow Pants", icon: "🩳" }] },
                 { min: 32, max: 50, items: [{ name: "Jacket", icon: "🧥" }] },
                 { min: 50, max: 65, items: [{ name: "Fleece or Light Jacket", icon: "🧥" }] },
                 { min: 65, max: 100, items: [{ name: "Short Sleeves", icon: "👕" }] }
@@ -186,7 +185,7 @@
             // Precipitation-based rules
             precipitation: [
                 { type: "rain", items: [{ name: "Rain Poncho", icon: "☔" }] },
-                { type: "snow", items: [{ name: "Snow Boots", icon: "👢" }] }
+                { type: "snow", items: [{ name: "Snow Boots", icon: "🥾" }] }
             ],
             // Cancellation rules
             cancellation: [
