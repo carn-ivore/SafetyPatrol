@@ -800,4 +800,69 @@
             const currentFeelsLike = Math.round(currentData.main.feels_like);
             const currentWeatherCondition = currentData.weather[0].description.toLowerCase();
             const currentWeatherMain = currentData.weather[0].main.toLowerCase();
-            const currentPrecipitation = currentWeatherMain.includes("rain") || currentWeatherMain.includes("snow") ||
+            const currentPrecipitation = currentWeatherMain.includes("rain") || currentWeatherMain.includes("snow");
+
+            // If morning patrol is over, use forecast for next morning
+            let morningForecast = null;
+            if (isMorningPatrolOver(now) && data.forecast) {
+                morningForecast = getNextMorningForecast(data.forecast);
+            }
+
+            // Set weather data for each section
+            setWeatherData("morning", morningForecast || currentData);
+            setWeatherData("recess", currentData);
+            setWeatherData("pickup", currentData);
+
+            // Handle early release toggle
+            if (isEarlyReleaseTime(now)) {
+                earlyReleaseToggle.checked = true;
+                regularPickupEl.classList.add("hidden");
+                earlyPickupEl.classList.remove("hidden");
+                setWeatherData("early-pickup", currentData);
+            } else {
+                earlyReleaseToggle.checked = false;
+                regularPickupEl.classList.remove("hidden");
+                earlyPickupEl.classList.add("hidden");
+            }
+
+            // Update last updated time
+            lastUpdatedEl.textContent = formatDate(timestamp, 'full');
+        }
+
+        // Set weather details for a section
+        function setWeatherData(section, weatherData) {
+            if (!weatherData) return;
+
+            document.getElementById(`${section}-temperature`).textContent = `${Math.round(weatherData.main.temp)}°F`;
+            document.getElementById(`${section}-feels-like`).textContent = `${Math.round(weatherData.main.feels_like)}°F`;
+            document.getElementById(`${section}-conditions`).textContent = weatherData.weather[0].description;
+            document.getElementById(`${section}-precipitation`).textContent = weatherData.rain ? `${weatherData.rain["1h"]} mm` : (weatherData.snow ? `${weatherData.snow["1h"]} mm` : "0 mm");
+
+            updateDecision(section, weatherData);
+        }
+
+        // Show loading indicator
+        function showLoading() {
+            loadingEl.style.display = "block";
+            contentEl.style.display = "none";
+            errorEl.style.display = "none";
+        }
+
+        // Hide loading indicator
+        function hideLoading() {
+            loadingEl.style.display = "none";
+            contentEl.style.display = "block";
+            errorEl.style.display = "none";
+        }
+
+        // Show error message
+        function showError(message) {
+            errorEl.textContent = message;
+            errorEl.style.display = "block";
+            loadingEl.style.display = "none";
+            contentEl.style.display = "none";
+        }
+    </script>
+</body>
+</html>
+
