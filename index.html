@@ -233,9 +233,33 @@
             refreshBtn.addEventListener('click', fetchWeatherData);
         });
 
+        // Add this function to your web app
+function setupApiKey() {
+    // Check if API key exists in local storage
+    const storedApiKey = localStorage.getItem('weatherApiKey');
+    
+    if (!storedApiKey) {
+        // If no API key found, prompt user to enter it
+        const apiKey = prompt("Please enter your OpenWeatherMap API key (this will be stored only on your device):");
+        
+        if (apiKey) {
+            localStorage.setItem('weatherApiKey', apiKey);
+            return apiKey;
+        } else {
+            showError("API key is required to use this app");
+            return null;
+        }
+    }
+    
+    return storedApiKey;
+}
+        
         // Fetch weather data based on user's location
         function fetchWeatherData() {
             showLoading();
+
+            const apiKey = setupApiKey();
+    if (!apiKey) return;
             
             // Check if geolocation is supported
             if (!navigator.geolocation) {
