@@ -67,6 +67,7 @@ document.addEventListener('touchend', function(e) {
 function refreshWeatherData() {
     // Call your existing function that fetches weather data
     // If you have a function that's already doing this, call it here
+    fetchWeatherData();
     // Otherwise, you might need to reload the page:
     location.reload();
 }
