@@ -29,7 +29,7 @@
             margin: 0;
             padding: 0;
             background-color: var(--lightgray);
-            color: var(black);
+            color: var(--black);
         }
         .container {
             max-width: 500px;
@@ -476,6 +476,79 @@ function setupApiKey() {
                 minute: '2-digit',
                 hour12: true
             });
+        }
+        // Pull to refresh functionality
+        let touchStartY = 0;
+        let touchEndY = 0;
+        const minSwipeDistance = 100;
+        const refreshIndicator = document.createElement('div');
+        
+        // Create and style the refresh indicator
+        refreshIndicator.id = 'refresh-indicator';
+        refreshIndicator.style.display = 'none';
+        refreshIndicator.style.position = 'fixed';
+        refreshIndicator.style.top = '0';
+        refreshIndicator.style.left = '0';
+        refreshIndicator.style.width = '100%';
+        refreshIndicator.style.padding = '10px 0';
+        refreshIndicator.style.textAlign = 'center';
+        refreshIndicator.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+        refreshIndicator.style.zIndex = '1000';
+        refreshIndicator.innerHTML = 'Pull down to refresh...';
+        document.body.appendChild(refreshIndicator);
+        
+        // Add touch event listeners
+        document.addEventListener('touchstart', function(e) {
+            touchStartY = e.touches[0].clientY;
+            
+            // Only show indicator if at top of page
+            if (window.scrollY <= 0) {
+                refreshIndicator.style.display = 'block';
+            }
+        }, false);
+        
+        document.addEventListener('touchmove', function(e) {
+            if (window.scrollY <= 0) {
+                touchEndY = e.touches[0].clientY;
+                const distance = touchEndY - touchStartY;
+                
+                if (distance > 0 && distance < 200) {
+                    refreshIndicator.innerHTML = 'Release to refresh...';
+                    refreshIndicator.style.padding = Math.min(distance/10, 20) + 'px 0';
+                }
+            }
+        }, false);
+        
+        document.addEventListener('touchend', function(e) {
+            refreshIndicator.style.display = 'none';
+            refreshIndicator.style.padding = '10px 0';
+            
+            if (window.scrollY <= 0) {
+                const distance = touchEndY - touchStartY;
+                
+                if (distance >= minSwipeDistance) {
+                    // Show loading indicator
+                    document.getElementById('loading').style.display = 'block';
+                    document.getElementById('content').style.display = 'none';
+                    document.getElementById('error').style.display = 'none';
+                    
+                    // Refresh the page data
+                    refreshWeatherData();
+                }
+            }
+            
+            // Reset values
+            touchStartY = 0;
+            touchEndY = 0;
+        }, false);
+        
+        // Function to refresh weather data
+        function refreshWeatherData() {
+            // Call your existing function that fetches weather data
+            // If you have a function that's already doing this, call it here
+            fetchWeatherData();
+            // Otherwise, you might need to reload the page:
+            location.reload();
         }
     </script>
 </body>
